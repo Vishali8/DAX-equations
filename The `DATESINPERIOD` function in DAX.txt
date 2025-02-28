@@ -1,0 +1,123 @@
+The `DATESINPERIOD` function in DAX is a time intelligence function that returns a table of dates shifted forward or backward in time by a specified number of intervals from a given start date. It is commonly used to calculate values over dynamic periods, such as rolling averages, cumulative totals, or comparisons over time.
+
+---
+
+### **Syntax of DATESINPERIOD**
+```DAX
+DATESINPERIOD(<Dates>, <StartDate>, <NumberOfIntervals>, <Interval>)
+```
+
+- **`<Dates>`**: A column containing dates (usually a date table column).
+- **`<StartDate>`**: The starting date for the period.
+- **`<NumberOfIntervals>`**: The number of intervals to shift (can be positive or negative).
+- **`<Interval>`**: The interval type (`DAY`, `MONTH`, `QUARTER`, `YEAR`).
+
+---
+
+### **Common Use Cases and Examples**
+
+#### 1. **Rolling 30-Day Sales**
+Calculate the total sales for the last 30 days, including the current date.
+```DAX
+Rolling 30-Day Sales = 
+CALCULATE(
+    SUM(Sales[Amount]),
+    DATESINPERIOD('Date'[Date], MAX('Date'[Date]), -30, DAY)
+)
+```
+
+#### 2. **Rolling 3-Month Sales**
+Calculate the total sales for the last 3 months, including the current month.
+```DAX
+Rolling 3-Month Sales = 
+CALCULATE(
+    SUM(Sales[Amount]),
+    DATESINPERIOD('Date'[Date], MAX('Date'[Date]), -3, MONTH)
+)
+```
+
+#### 3. **Next 7 Days Forecast**
+Calculate the total sales for the next 7 days, starting from the current date.
+```DAX
+Next 7 Days Forecast = 
+CALCULATE(
+    SUM(Sales[Amount]),
+    DATESINPERIOD('Date'[Date], MAX('Date'[Date]), 7, DAY)
+)
+```
+
+#### 4. **Year-to-Date (YTD) Sales**
+Calculate the cumulative sales from the start of the year to the current date.
+```DAX
+YTD Sales = 
+CALCULATE(
+    SUM(Sales[Amount]),
+    DATESINPERIOD('Date'[Date], MAX('Date'[Date]), -1, YEAR)
+)
+```
+
+#### 5. **Rolling 12-Month Average**
+Calculate the average sales over the last 12 months.
+```DAX
+Rolling 12-Month Avg = 
+AVERAGEX(
+    DATESINPERIOD('Date'[Date], MAX('Date'[Date]), -12, MONTH),
+    SUM(Sales[Amount])
+)
+```
+
+#### 6. **Dynamic Date Range Comparison**
+Compare sales for the last 30 days with the previous 30 days.
+```DAX
+Sales Last 30 Days = 
+CALCULATE(
+    SUM(Sales[Amount]),
+    DATESINPERIOD('Date'[Date], MAX('Date'[Date]), -30, DAY)
+)
+
+Sales Previous 30 Days = 
+CALCULATE(
+    SUM(Sales[Amount]),
+    DATESINPERIOD('Date'[Date], MAX('Date'[Date]) - 30, -30, DAY)
+)
+
+Sales Comparison = [Sales Last 30 Days] - [Sales Previous 30 Days]
+```
+
+#### 7. **Quarter-to-Date (QTD) Sales**
+Calculate the cumulative sales from the start of the quarter to the current date.
+```DAX
+QTD Sales = 
+CALCULATE(
+    SUM(Sales[Amount]),
+    DATESINPERIOD('Date'[Date], MAX('Date'[Date]), -1, QUARTER)
+)
+```
+
+#### 8. **Rolling 6-Month Sales Growth**
+Calculate the percentage growth in sales over the last 6 months compared to the previous 6 months.
+```DAX
+Sales Last 6 Months = 
+CALCULATE(
+    SUM(Sales[Amount]),
+    DATESINPERIOD('Date'[Date], MAX('Date'[Date]), -6, MONTH)
+)
+
+Sales Previous 6 Months = 
+CALCULATE(
+    SUM(Sales[Amount]),
+    DATESINPERIOD('Date'[Date], MAX('Date'[Date]) - 6, -6, MONTH)
+)
+
+Sales Growth 6 Months = 
+DIVIDE([Sales Last 6 Months] - [Sales Previous 6 Months], [Sales Previous 6 Months])
+```
+
+---
+
+### **Key Notes**
+- `DATESINPERIOD` is often used with `CALCULATE` to modify the filter context for time-based calculations.
+- Ensure you have a properly structured date table in your data model for accurate results.
+- Use negative values for `<NumberOfIntervals>` to look back in time and positive values to look forward.
+
+By leveraging `DATESINPERIOD`, you can create dynamic and flexible time-based calculations in Power BI to analyze trends, compare periods, and forecast future performance.
