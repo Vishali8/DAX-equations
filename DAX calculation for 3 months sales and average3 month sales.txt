@@ -1,18 +1,3 @@
-Performance optimization, also known as performance tuning, involves making changes to the current state of the data model so that it runs more efficiently. Essentially, when your data model is optimized, it performs better.some of the performance tuning are Optimize ,Transform data ,normalization ,Choosing measures over calculated columns ,using star schema ,etc,.
-
-Data Analysis Expressions (DAX) is a collection of functions and operators that can be combined to build formulas and expressions in Power BI, Analysis Services, and Power Pivot in Excel data models.
-
-Data Analysis Expressions (DAX) is a programming language that is used throughout Microsoft Power BI for creating calculated columns, measures, and custom tables. It is a collection of functions, operators, and constants that can be used in a formula, or expression, to calculate and return one or more values.
-
-
-The VALUE function converts a string that represents a number to number.The VALUES function returns a one-column table that contains the distinct values from the specified table or column. In other words, duplicate values are removed and only unique values are returned.
-
-In DAX DISTINCT returns a one-column table that contains the distinct values from the specified column. In other words, duplicate values are removed, and only unique values are returned
-
-ALL ignores any filters coming from anywhere in this visual or other visual on the page whereas ,ALLSELECTED only ignores the filters coming from inside the visual itself
-
-ALLSELECTED function in Power BI returns all the values in a column, or all the rows in a table while ignoring all the filters that might have been applied inside the query, and keeping the filters that might have come from the outside.The ALL function ignores all filters, regardless of where they are coming from.
-
 Write a dax query to retrieve the last 3 month sales and its avg
 
 Last 3 Month Sales = 
