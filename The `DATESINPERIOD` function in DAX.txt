@@ -1,20 +1,7 @@
-The `DATESINPERIOD` function in DAX is a time intelligence function that returns a table of dates shifted forward or backward in time by a specified number of intervals from a given start date. It is commonly used to calculate values over dynamic periods, such as rolling averages, cumulative totals, or comparisons over time.
-
----
-
 ### **Syntax of DATESINPERIOD**
 ```DAX
 DATESINPERIOD(<Dates>, <StartDate>, <NumberOfIntervals>, <Interval>)
-```
-
-- **`<Dates>`**: A column containing dates (usually a date table column).
-- **`<StartDate>`**: The starting date for the period.
-- **`<NumberOfIntervals>`**: The number of intervals to shift (can be positive or negative).
-- **`<Interval>`**: The interval type (`DAY`, `MONTH`, `QUARTER`, `YEAR`).
-
----
-
-### **Common Use Cases and Examples**
+Examples
 
 #### 1. **Rolling 30-Day Sales**
 Calculate the total sales for the last 30 days, including the current date.
@@ -112,12 +99,3 @@ CALCULATE(
 Sales Growth 6 Months = 
 DIVIDE([Sales Last 6 Months] - [Sales Previous 6 Months], [Sales Previous 6 Months])
 ```
-
----
-
-### **Key Notes**
-- `DATESINPERIOD` is often used with `CALCULATE` to modify the filter context for time-based calculations.
-- Ensure you have a properly structured date table in your data model for accurate results.
-- Use negative values for `<NumberOfIntervals>` to look back in time and positive values to look forward.
-
-By leveraging `DATESINPERIOD`, you can create dynamic and flexible time-based calculations in Power BI to analyze trends, compare periods, and forecast future performance.
